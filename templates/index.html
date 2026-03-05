@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hirefusion</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+🤖Hirefusion
+</div>
+
+
+<div class="background">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+
+<div class="container">
+
+<h1 class="typing-title">
+AI Resume Screening System
+</h1>
+
+
+<form action="/analyze" method="POST" enctype="multipart/form-data" class="upload-form">
+
+<input type="text" name="role" placeholder="Enter Job Role" required>
+
+<textarea name="description" placeholder="Enter Job Description"></textarea>
+
+<input type="file" name="resumes" multiple required>
+
+<button type="submit" class="analyze-btn">
+🚀 Analyze Resumes
+</button>
+
+</form>
+
+
+{% if best %}
+
+<div class="best-card">
+
+<h2 class="glow-score">🏆 Best Candidate</h2>
+
+<p><b>Name:</b> {{best.name}}</p>
+
+<p><b>Match Score:</b> {{best.score}}%</p>
+
+<div class="progress">
+<div class="progress-bar" style="width: {{ best.score }}%;"></div>
+</div>
+
+<a href="/resume/{{best.resume}}" target="_blank">
+<button class="open-btn">View Resume</button>
+</a>
+
+</div>
+
+{% endif %}
+
+
+
+{% if table %}
+
+<div class="results-section">
+
+<table class="results-table">
+
+<tr>
+<th>Name</th>
+<th>Score</th>
+<th>Missing Skills</th>
+<th>Matched Skills</th>
+<th>Resume</th>
+</tr>
+
+{% for r in table %}
+
+<tr>
+
+<td>{{ r.name }}</td>
+
+<td>
+
+<div class="progress">
+<div class="progress-bar" style="width: {{ r.score }}%;"></div>
+</div>
+
+<span class="score">{{ r.score }}%</span>
+
+</td>
+
+<td>
+
+{% for skill in r.missing %}
+<span class="skill-tag missing">{{ skill }}</span>
+{% endfor %}
+
+</td>
+
+<td>
+
+{% for skill in r.matched %}
+<span class="skill-tag">{{ skill }}</span>
+{% endfor %}
+
+</td>
+
+<td>
+
+<a href="/resume/{{ r.resume }}" target="_blank">
+<button class="open-btn">Open</button>
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>
