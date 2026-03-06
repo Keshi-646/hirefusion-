@@ -3,13 +3,11 @@ HIREFUSION – AI Powered Resume Screening & Skill Matching Platform
 **Hirefusion** is an AI-powered resume screening platform that helps recruiters quickly analyze resumes and match them with job roles based on required skills.
 
 The system extracts skills from uploaded resumes, compares them with role-specific skills, and calculates a **matching score**. It also highlights **matching skills and missing skills**, helping both recruiters and candidates understand the suitability of the resume.
-
 This platform reduces manual resume screening and improves hiring efficiency using **AI-driven skill analysis**.
-
+ 
  Problem Statement
 
 Recruiters often receive hundreds of resumes for a single job role. Manually analyzing these resumes is time-consuming and inefficient.
-
 **AlgoMatch solves this problem by:**
 
 * Automatically extracting skills from resumes
@@ -17,64 +15,44 @@ Recruiters often receive hundreds of resumes for a single job role. Manually ana
 * Providing an instant skill match score
 
  Key Features
- **Resume Upload**
+ Resume Upload
 Upload multiple resumes in PDF format.
-**Skill Extraction**
+Skill Extraction
 Automatically extracts candidate skills from resumes.
-
-✅ **Role-Based Matching**
+Role-Based Matching
 Compares resume skills with job role skills.
-
-✅ **Matching Score**
+Matching Score
 Displays percentage of skill match.
-
-✅ **Matching Skills Highlight**
+Matching Skills Highlight
 Shows skills that match the job role.
-
-✅ **Missing Skills Detection**
+Missing Skills Detection
 Identifies important skills missing from the resume.
-
-✅ **Explainable AI**
+Explainable AI
 Shows how the score was calculated.
-
-✅ **Collaboration Features**
+Collaboration Features
 Allows HR teams to evaluate candidates efficiently.
-
----
-
-## 🧠 Tech Stack
+ Tech Stack
 
 **Frontend**
-
 * HTML
 * CSS
 * JavaScript
-
 **Backend**
-
 * Python
 * Flask
-
-**Libraries & Tools**
-
+Libraries & Tools
 * Pandas
 * PDF Parser
 * Google Gemini API (AI skill extraction)
+ How It Works
 
----
-
-## ⚙️ How It Works
-
-1️⃣ Upload candidate resumes
-2️⃣ System extracts text from the resume
-3️⃣ AI identifies skills in the resume
-4️⃣ Skills are compared with job role requirements
-5️⃣ Matching score is calculated
-6️⃣ Matching and missing skills are displayed
-
----
-
-## 🖥️ Project Structure
+Upload candidate resumes
+System extracts text from the resume
+AI identifies skills in the resume
+Skills are compared with job role requirements
+Matching score is calculated
+Matching and missing skills are displayed
+Project Structure
 
 ```
 AlgoMatch
@@ -98,38 +76,28 @@ AlgoMatch
 ## ▶️ Installation & Setup
 
 Clone the repository
-
 ```
 git clone https://github.com/yourusername/AlgoMatch.git
 ```
-
 Navigate to the project folder
-
 ```
 cd AlgoMatch
 ```
-
 Install dependencies
-
 ```
 pip install -r requirements.txt
 ```
-
 Run the application
 
 ```
 python app.py
 ```
-
 Open in browser
 
 ```
 http://127.0.0.1:5000
 ```
-
----
-
-## 📊 Future Improvements
+ Future Improvements
 
 * Resume ranking system
 * Support for DOCX resumes
@@ -137,21 +105,12 @@ http://127.0.0.1:5000
 * Candidate recommendation system
 * AI interview question generation
 
----
+  #demo screenshot
+  <img width="1879" height="869" alt="image" src="https://github.com/user-attachments/assets/7bbaf322-5f3a-4d4a-ad82-3d197d83634a" />
 
-## 🏆 Hackathon Project
-
-This project was developed as part of a **Hackathon Project** to demonstrate how AI can simplify the recruitment process.
-
----
-
-## 👨‍💻 Author
-
+#author
 **Keshiya V**
 Artificial Intelligence & Data Science Student
 Passionate about AI, Web Development, and Problem Solving.
 
----
-
-⭐ If you like this project, please give it a star!
 
