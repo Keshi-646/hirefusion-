@@ -111,7 +111,6 @@ def analyze():
 
         resume_skills = list(set(resume_skills))
 
-
         # --------- SKILL MATCHING ---------
 
         matched = []
@@ -130,12 +129,27 @@ def analyze():
         else:
             score = 0
 
+        # --------- AI RECOMMENDATION ---------
+
+        if score >= 75:
+            recommendation = "Highly Recommended"
+        elif score >= 50:
+            recommendation = "Consider for Interview"
+        else:
+            recommendation = "Skill Gap Detected"
+
+        # --------- EXPLAINABLE AI ---------
+
+        explanation = f"{len(matched)} out of {len(role_skills)} required skills matched"
+
         candidates.append({
             "name": name,
             "resume": file.filename,
             "score": score,
             "matched": matched,
             "missing": missing,
+            "recommendation": recommendation,
+            "explanation": explanation,
             "filename": file.filename
         })
 
@@ -145,11 +159,19 @@ def analyze():
             error="No valid resumes detected."
         )
 
+    # --------- SORT CANDIDATES ---------
+
     df = pd.DataFrame(candidates)
 
     df = df.sort_values(by="score", ascending=False)
 
+    # --------- ADD RANKING ---------
+
+    df["rank"] = range(1, len(df) + 1)
+
     table = df.to_dict(orient="records")
+
+    # --------- BEST CANDIDATE ---------
 
     best = table[0]
 

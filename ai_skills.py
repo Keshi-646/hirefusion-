@@ -1,7 +1,6 @@
 import re
 from google import genai
 
-# 🔑 Put your Gemini API key here
 client = genai.Client(api_key="AIzaSyDzWdwgHX7XDbhl1pUVEsgo5jctTvVkEzE")
 
 

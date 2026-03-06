@@ -1,75 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Hirefusion</title>
+<title>HireFusion AI</title>
 
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
-<div class="navbar">
-🤖Hirefusion
-</div>
+<div class="sidebar">
 
+<h1>HIRE<span>FUSION</span> AI</h1>
+<p>Precision Matching</p>
 
-<div class="background">
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-</div>
+<form action="/analyze" method="POST" enctype="multipart/form-data">
 
+<label>Target Job Role</label>
+<input type="text" name="role" required>
 
-<div class="container">
+<label>Job Description</label>
+<textarea name="jd" rows="4"></textarea>
 
-<h1 class="typing-title">
-AI Resume Screening System
-</h1>
+<label>Upload Resumes</label>
+<input type="file" name="resumes" multiple>
 
-
-<form action="/analyze" method="POST" enctype="multipart/form-data" class="upload-form">
-
-<input type="text" name="role" placeholder="Enter Job Role" required>
-
-<textarea name="description" placeholder="Enter Job Description"></textarea>
-
-<input type="file" name="resumes" multiple required>
-
-<button type="submit" class="analyze-btn">
-🚀 Analyze Resumes
-</button>
+<button type="submit">Analyze</button>
 
 </form>
+
+</div>
+
+
+<div class="main">
+
+<h1 class="dashboard-title">Dashboard</h1>
+
+{% if error %}
+<div class="error">{{ error }}</div>
+{% endif %}
 
 
 {% if best %}
 
 <div class="best-card">
 
-<h2 class="glow-score">🏆 Best Candidate</h2>
-
-<p><b>Name:</b> {{best.name}}</p>
-
-<p><b>Match Score:</b> {{best.score}}%</p>
-
-<div class="progress">
-<div class="progress-bar" style="width: {{ best.score }}%;"></div>
+<div class="score-circle">
+{{ best.score }}%
 </div>
 
-<a href="/resume/{{best.resume}}" target="_blank">
-<button class="open-btn">View Resume</button>
-</a>
+<div class="best-info">
+
+<h2>{{ best.name }}</h2>
+
+<p>Matches:
+{{ best.matched | join(", ") }}
+</p>
+
+</div>
+
+<div class="ai-box">
+
+<b>AI Insight</b><br>
+
+✔ Ranked #{{ best.rank }} candidate<br>
+✔ {{ best.explanation }}<br>
+✔ {{ best.recommendation }}
+
+</div>
 
 </div>
 
@@ -79,10 +81,13 @@ AI Resume Screening System
 
 {% if table %}
 
-<div class="results-section">
+<div class="table-card">
 
-<table class="results-table">
+<h2>Candidate Shortlist</h2>
 
+<table>
+
+<thead>
 <tr>
 <th>Name</th>
 <th>Score</th>
@@ -90,6 +95,9 @@ AI Resume Screening System
 <th>Matched Skills</th>
 <th>Resume</th>
 </tr>
+</thead>
+
+<tbody>
 
 {% for r in table %}
 
@@ -100,40 +108,40 @@ AI Resume Screening System
 <td>
 
 <div class="progress">
-<div class="progress-bar" style="width: {{ r.score }}%;"></div>
+<div class="progress-bar" style="width: {{ r.score }}%"></div>
 </div>
 
-<span class="score">{{ r.score }}%</span>
+{{ r.score }}%
 
 </td>
 
 <td>
 
-{% for skill in r.missing %}
-<span class="skill-tag missing">{{ skill }}</span>
+{% for s in r.missing %}
+<span class="missing">{{ s }}</span>
 {% endfor %}
 
 </td>
 
 <td>
 
-{% for skill in r.matched %}
-<span class="skill-tag">{{ skill }}</span>
+{% for s in r.matched %}
+<span class="matched">{{ s }}</span>
 {% endfor %}
 
 </td>
 
 <td>
 
-<a href="/resume/{{ r.resume }}" target="_blank">
-<button class="open-btn">Open</button>
-</a>
+<a class="open-btn" href="/resume/{{ r.filename }}">Open</a>
 
 </td>
 
 </tr>
 
 {% endfor %}
+
+</tbody>
 
 </table>
 
